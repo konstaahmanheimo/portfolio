@@ -20,7 +20,7 @@
     <li><a href="#osaaminen">Skills</a></li>
     <li><a href="#minusta">About</a></li>
     <li><a href="#yhteys">Contact</a></li>
-    <li><button class="kbd" id="openCmd" aria-label="Open command palette">Ctrl K</button></li>
+    <li><button class="kbd" id="openCmd" aria-label="Open command palette">Menu</button></li>
   </ul>
 </div></nav>
 
@@ -51,9 +51,9 @@
 <section id="osaaminen"><div class="wrap">
   <h2>Skills</h2>
   <div class="cols">
-    <div><h3>Development</h3><ul><li>HTML, CSS, JavaScript, PHP, Python</li><li>MySQL, databases</li><li>Git and the command line</li></ul></div>
+    <div><h3>Development</h3><ul><li>HTML, CSS, JavaScript, React, PHP, Python</li><li>MySQL, databases</li><li>Git and the command line</li></ul></div>
     <div><h3>Design</h3><ul><li>Interfaces</li><li>Typography and color</li><li>Accessibility</li></ul></div>
-    <div><h3>Other</h3><ul><li>Offencive Cybersecurity</li><li>Testing</li><li>Linux</li></ul></div>
+    <div><h3>Other</h3><ul><li>Offencive Cybersecurity</li><li>Testing (Postman, Robot Framework)</li><li>Linux</li></ul></div>
   </div>
 </div></section>
 
@@ -61,8 +61,8 @@
   <h2>About</h2>
   <div class="about">
     <div>
-      <p>Just a garbageman wanting to be a successfull software developer. </p>
-      <p>Web developing is my strongest skill, but i'm most interested in cybersecurity ja testing. I'm pretty good at UX/UI. </p>
+      <p>On my way to the top. </p>
+      <p>Web developing is my strongest skill, experience since 2024. Interested in cybersecurity and testing, gaining experience in that field also. Pretty good at UX/UI. </p>
     </div>
     <ol class="timeline">
       <li><b>Hämeen ammattikorkeakoulu</b><span>Tieto- ja viestintätekniikan insinööritutkinto, 2026–</span></li>
@@ -87,11 +87,11 @@
 </div></section>
 </main>
 
-<footer><div class="wrap">© <span id="yr"></span> Konsta</div></footer>
+<footer><div class="wrap">© <span id="yr"></span> Konsta Ahmanheimo</div></footer>
 
 <dialog id="proj" aria-labelledby="pt"><div class="pbody">
-  <h3 id="pt"></h3><p id="pd"></p><p id="ptags" style="color:var(--accent)"></p>
-  <div class="row"><a class="btn primary" id="pl" href="#">Open project</a><button class="btn" id="pc">Close</button></div>
+  <h3 id="pt"></h3><p id="pd"></p><p id="ptags" style="color:var(--accent)"></p><iframe id="pf" title="Project preview" loading="lazy"></iframe>
+  <div class="row"><a class="btn primary" id="pl" href="#" target="_blank" rel="noopener">Open project</a><button class="btn" id="pc">Close</button></div>
 </div></dialog>
 
 <dialog id="cmd" aria-label="Command palette">
@@ -103,7 +103,11 @@
 <script>
 const EMAIL="ahmanheimo@proton.me";
 const PROJECTS=[
- {t:"TBA",d:"",tags:["Web"],url:"#"},
+ {t:"sprintboard",
+ d:"Tech Stack :  React, JavaScript, HTML, CSS, Vite, Lucide React, Browser Local Storage, Vercel. A simple and fast web app for tracking your sprints and tasks. It is a single page application that uses local storage to save your data. It is built with React and Vite. It is deployed on Vercel.",
+
+ tags:["Web"],
+ url:"https://sprintboard-six.vercel.app/"},
  {t:"TBA",d:"",tags:["Tools"],url:"#"},
  {t:"TBA",d:"",tags:["Web","Tools"],url:"#"},
  {t:"Custom PC build",d:"Hardware project: component choices, cooling, tuning and benchmark results before and after.",tags:["Hardware"],url:"#"}
@@ -123,7 +127,7 @@ PROJECTS.forEach((p,i)=>{
   const b=document.createElement("button");b.className="card";b.dataset.tags=p.tags.join(",");
   b.innerHTML=`<h3></h3><p></p><span class="tags"></span>`;
   b.querySelector("h3").textContent=p.t;b.querySelector("p").textContent=p.d.split(".")[0]+".";b.querySelector(".tags").textContent=p.tags.join(", ");
-  b.onclick=()=>{$("#pt").textContent=p.t;$("#pd").textContent=p.d;$("#ptags").textContent=p.tags.join(", ");$("#pl").href=p.url;dlg.showModal()};
+  b.onclick=()=>{$("#pt").textContent=p.t;$("#pd").textContent=p.d;$("#ptags").textContent=p.tags.join(", ");$("#pl").href=p.url;p.url&&p.url!=="#"?$("#pf").src=p.url:$("#pf").removeAttribute("src");dlg.showModal()};
   b.onpointermove=e=>{const r=b.getBoundingClientRect();b.style.setProperty("--mx",e.clientX-r.left+"px");b.style.setProperty("--my",e.clientY-r.top+"px")};
   grid.append(b);
 });
